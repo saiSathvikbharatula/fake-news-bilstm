@@ -20,7 +20,7 @@ def load_model(path=config.MODEL_PATH):
     if _model is None:
         if not path.exists():
             raise FileNotFoundError(f"No trained model at {path}. Run `python -m src.train` first.")
-        _model = tf.keras.models.load_model(path)
+        _model = tf.keras.models.load_model(path, compile=False)
     return _model
 
 

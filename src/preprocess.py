@@ -47,11 +47,18 @@ _NON_ALPHA_RE = re.compile(r"[^a-z\s]")
 _SPACES_RE = re.compile(r"\s+")
 
 
+def strip_dateline(text: str) -> str:
+    """Remove a leading agency dateline such as "WASHINGTON (Reuters) - "."""
+    if not isinstance(text, str):
+        return ""
+    return _DATELINE_RE.sub("", text.strip())
+
+
 def clean_text(text: str, remove_stopwords: bool = True) -> str:
     """Lowercase, strip leakage/URLs/HTML/punctuation and optionally stop-words."""
     if not isinstance(text, str):
         return ""
-    text = _DATELINE_RE.sub("", text.strip())
+    text = strip_dateline(text)
     text = text.lower()
     text = _URL_RE.sub(" ", text)
     text = _HTML_RE.sub(" ", text)

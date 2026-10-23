@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 import config
-from src.preprocess import clean_text
+from src.preprocess import clean_text, strip_dateline
 
 
 def load_dataset(path=config.DATA_PATH, sample: int | None = None) -> pd.DataFrame:
@@ -16,7 +16,9 @@ def load_dataset(path=config.DATA_PATH, sample: int | None = None) -> pd.DataFra
     df = pd.read_csv(path)
     df = df[["title", "text", "label"]]
     df["title"] = df["title"].fillna("")
-    df["text"] = df["text"].fillna("")
+    # Strip the dateline from the body *before* joining, so a long title
+    # cannot push it past the regex's 80-character window.
+    df["text"] = df["text"].fillna("").apply(strip_dateline)
     df["content"] = (df["title"] + " " + df["text"]).str.strip()
 
     before = len(df)
