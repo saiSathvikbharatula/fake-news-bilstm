@@ -68,7 +68,7 @@ fake-news-bilstm/
 ├── requirements.txt
 ├── data/                   # put WELFake_Dataset.csv here
 ├── glove/                  # GloVe vectors (downloaded)
-├── models/                 # saved model (.keras)
+├── models/                 # trained model (.keras, ~21 MB, committed)
 ├── outputs/                # metrics.json + plots
 ├── scripts/
 │   └── download_glove.py

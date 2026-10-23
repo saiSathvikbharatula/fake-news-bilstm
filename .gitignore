@@ -9,5 +9,4 @@ data/*.csv
 glove/
 *.zip
 
-# Trained model is ~120 MB - over GitHub's 100 MB limit, so it is not committed
-models/*.keras
+# Trained model (~21 MB) IS committed so the Streamlit Cloud app can load it

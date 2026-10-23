@@ -44,10 +44,12 @@ def load_glove_matrix(vocab: list[str], glove_path: Path = config.GLOVE_PATH) ->
 def build_bilstm(vocab_size: int, embedding_matrix: np.ndarray | None = None) -> tf.keras.Model:
     """Embedding -> Bi-LSTM -> GlobalMaxPool -> Dense -> Sigmoid  (input: int token ids)."""
     if embedding_matrix is not None:
+        # GloVe weights are loaded with set_weights() below, not a Constant
+        # initializer - otherwise the whole matrix is serialized into the saved
+        # model's config.json (~100 MB extra).
         embedding = layers.Embedding(
             vocab_size,
             config.EMBED_DIM,
-            embeddings_initializer=tf.keras.initializers.Constant(embedding_matrix),
             trainable=config.TRAIN_EMBEDDINGS,
             mask_zero=False,
             name="glove_embedding",
@@ -65,6 +67,8 @@ def build_bilstm(vocab_size: int, embedding_matrix: np.ndarray | None = None) ->
     outputs = layers.Dense(1, activation="sigmoid", name="p_fake")(x)
 
     model = tf.keras.Model(inputs, outputs, name="bilstm_fake_news")
+    if embedding_matrix is not None:
+        embedding.set_weights([embedding_matrix])
     model.compile(
         optimizer=tf.keras.optimizers.Adam(config.LEARNING_RATE),
         loss="binary_crossentropy",
