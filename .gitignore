@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# Large files - do not commit
+data/*.csv
+glove/
+*.zip
+
+# Trained model is ~120 MB - over GitHub's 100 MB limit, so it is not committed
+models/*.keras
