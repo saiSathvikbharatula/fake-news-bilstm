@@ -5,9 +5,11 @@ A deep learning NLP project that classifies news articles as **REAL** or **FAKE*
 **WELFake** dataset (72K articles, 63.6K after removing duplicates), benchmarked against a TF-IDF + Logistic Regression baseline,
 and deployed as a **Streamlit** web app.
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.16+-orange)
-![Streamlit](https://img.shields.io/badge/Streamlit-app-red)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://fake-news-bilstm-fnr7gobkdzvi3w2eowl73c.streamlit.app/)
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.18-orange)
+
+🚀 **Live demo:** [https://fake-news-bilstm-fnr7gobkdzvi3w2eowl73c.streamlit.app/](https://fake-news-bilstm-fnr7gobkdzvi3w2eowl73c.streamlit.app/)
 
 ---
 
